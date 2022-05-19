@@ -1,29 +1,29 @@
 # OP-L
-## The OP-L is an portable progrmable RGB with a handle. 
+## The OP-L is a portable programmable RGB with a handle. 
 ![image](https://user-images.githubusercontent.com/98760075/169195585-2c031e6e-ce47-465b-a5a6-c0676219cad4.png)
 
-It is designeg for work ilumination, outdoor ilumination, and for video recordings. 
-- The case is 3D printed using ABS like resin. 
+It is designed for work illumination, outdoor illumination, and for video recordings. 
+- The case is 3D printed using ABS-like resin. 
 - It uses an acrylic panel as a difuser.
-- The It uses a matrix ws2812b addressable LEDs, soldered to hand mande printed circuit board.
-- The OP-L uses a QTPY  as the brains of the operations.
-- To interact with the OP-L There are programable rotary enconders conected via I2C to the QTPY. 
-- It has a 4000 mAh battery that lasts as for more than 2 hours in medium brightness.
-- Its articulated handle can be adjusted for different positions, or removed to connect to a tripod.
+- The It uses matrix ws2812b addressable LEDs, soldered by a hand-made printed circuit board.
+- The OP-L uses a QTPY  as the brains of the operation.
+- To interact with the OP-L, there are programable rotary enconders connected via I2C to the QTPY. 
+- It has a 4000 mAh battery that lasts for more than 2 hours in medium brightness.
+- It's articulated handle can be adjusted for different positions, or removed to connect to a tripod.
 
 ### Programing: 
 The OP-L was programmed using Arduino IDE
-The I2C Encoders example from adafruit was used to connect multiple encoders to the QTPY usind Stemma Connect. 
+The I2C Encoders example from Adafruit was used to connect multiple encoders to the QTPY usind Stemma Connect. 
 Each Seesaw component needs to have a different address for the I2C protocol to work, you can find the Diferent available addresses in this [page](https://learn.adafruit.com/i2c-addresses/the-list) from Adafruit.
 
-For rotary encoders the available addresses are: 
+For rotary encoders, the available addresses are: 
 > 0x36 through 0x3D
 
 ![image](https://user-images.githubusercontent.com/98760075/169197235-8c63146c-09c5-4231-9703-6ce4a8748de4.png)
 
-The address on the rotary encoder can be modified by clossing either the A0, A1, or A2 on the back of the circuit board. or a combination of them to get up to 8 different I2C addresses. For more informaion visit the [I2C QT Rotary Encoder Guide](https://learn.adafruit.com/adafruit-i2c-qt-rotary-encoder)  
+The address on the rotary encoder can be modified by closing the A0, A1, or A2 on the back of the circuit board. or a combination of them to get up to 8 different I2C addresses. For more informaion visit the [I2C QT Rotary Encoder Guide](https://learn.adafruit.com/adafruit-i2c-qt-rotary-encoder)  
 
-The Sketch Loops through the diferent addresses and declare them as encoders to find which ones are connected and declare them as inputs. 
+The Sketch loops through the diferent addresses and declare them as encoders to find which ones are connected and declare them as inputs. 
 
     for (uint8_t enc = 0; enc < sizeof(found_encoders); enc++) {
     // See if we can find encoders on this address
@@ -61,11 +61,11 @@ The Sketch Loops through the diferent addresses and declare them as encoders to 
       found_encoders[enc] = true;
     }
 
-This part of the code inicialices the rotary encoder as well as the neopixel inside the rotary encooder board. 
+This part of the code initializes the rotary encoder, as well as the neopixel on the rotary encooder board. 
 
-To controll the Addressable LEDs on the OP-L, the Neopixel Library Is used as well as the Wheel functieon found in the Neopixel Sketch From Adafruit. 
+To control the addressable LEDs on the OP-L, the Neopixel library is used, as well as the Wheel functieon found in the Neopixel Sketch From Adafruit. 
 
-The Wheel funnction maps the RGB values used by the LEDs in a Wheel to achive a smooth transition between the hues they are able to reproduce. 
+The Wheel function maps the RGB values used by the LEDs to achive a smooth transition between the hues they are able to reproduce. 
         
     uint32_t Wheel(byte WheelPos) {
      WheelPos = 255 - WheelPos;
@@ -79,7 +79,7 @@ The Wheel funnction maps the RGB values used by the LEDs in a Wheel to achive a 
         WheelPos -= 170;
         return seesaw_NeoPixel::Color(WheelPos * 3, 255 - WheelPos * 3, 0);
      }
-To control the color of the Neopixels with the rotary encoder, it is necesary to map the position of the rotary encoder, with the position on the Wheel of colors. 
+To control the color of the Neopixels with the rotary encoder, it is necesary to map the position of the rotary encoder with the position on the Wheel of colors. 
 
     for(int i=0; i<NUMPIXELS;i++){
      pixels.setPixelColor(i,Wheel((new_position0*4)&0xFF));
