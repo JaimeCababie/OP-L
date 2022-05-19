@@ -101,6 +101,16 @@ The comoponents used in the OP-L are:
 
 ##Mecanical components
 
+The harware used in the OP-L: 
+
+- 4 brass M3 inserts 
+- 4 M3 silver plated screws
+- 1 1/4" steel insert for the handle and Tripod Mount
+- 1 1/4" Screw 
+- 8 self tapping screws to cold the rotary encoders.
+
+Check Out the StEP file for more information!
+
 
 
 
