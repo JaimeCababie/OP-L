@@ -11,7 +11,7 @@ It is designeg for work ilumination, outdoor ilumination, and for video recordin
 - It has a 4000 mAh battery that lasts as for more than 2 hours in medium brightness.
 - Its articulated handle can be adjusted for different positions, or removed to connect to a tripod.
 
-###Programing: 
+### Programing: 
 The OP-L was programmed using Arduino IDE
 The I2C Encoders example from adafruit was used to connect multiple encoders to the QTPY usind Stemma Connect. 
 Each Seesaw component needs to have a different address for the I2C protocol to work, you can find the Diferent available addresses in this [page](https://learn.adafruit.com/i2c-addresses/the-list) from Adafruit.
