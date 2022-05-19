@@ -1,5 +1,5 @@
 # OP-L
-##The OP-L is an portable progrmable RGB with a handle. 
+## The OP-L is an portable progrmable RGB with a handle. 
 ![image](https://user-images.githubusercontent.com/98760075/169195585-2c031e6e-ce47-465b-a5a6-c0676219cad4.png)
 
 It is designeg for work ilumination, outdoor ilumination, and for video recordings. 
@@ -89,7 +89,7 @@ To control the color of the Neopixels with the rotary encoder, it is necesary to
   }
 Check out the OP-L code to learn more about how it works!
 
-##Electronics
+## Electronics
 The comoponents used in the OP-L are: 
 
 - 1 QTPY MO 
@@ -99,7 +99,7 @@ The comoponents used in the OP-L are:
 - 1 4000mAh Lithium Ion Battery
 - 80 WS2812b LEDs 
 
-##Mecanical components
+## Mecanical components
 
 The harware used in the OP-L: 
 
