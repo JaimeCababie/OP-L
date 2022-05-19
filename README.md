@@ -25,7 +25,7 @@ The address on the rotary encoder can be modified by clossing either the A0, A1,
 
 The Sketch Loops through the diferent addresses and declare them as encoders to find which ones are connected and declare them as inputs. 
 
-'  for (uint8_t enc = 0; enc < sizeof(found_encoders); enc++) {
+    for (uint8_t enc = 0; enc < sizeof(found_encoders); enc++) {
     // See if we can find encoders on this address
     if (! encoders[enc].begin(SEESAW_BASE_ADDR + enc) ||
         ! encoder_pixels[enc].begin(SEESAW_BASE_ADDR + enc)) {
@@ -34,8 +34,51 @@ The Sketch Loops through the diferent addresses and declare them as encoders to 
     } else {
       Serial.print("Found encoder + pixel #");
       Serial.println(enc);
-      '
 
+      uint32_t version = ((encoders[enc].getVersion() >> 16) & 0xFFFF);
+      if (version != 4991) {
+        Serial.print("Wrong firmware loaded? ");
+        Serial.println(version);
+        while (1) delay(10);
+      }
+      Serial.println("Found Product 4991");
+
+      // use a pin for the built in encoder switch
+      encoders[enc].pinMode(SS_SWITCH, INPUT_PULLUP);
+
+      // get starting position
+      encoder_positions[enc] = encoders[enc].getEncoderPosition();
+
+      Serial.println("Turning on interrupts");
+      delay(10);
+      encoders[enc].setGPIOInterrupts((uint32_t)1 << SS_SWITCH, 1);
+      encoders[enc].enableEncoderInterrupt();
+
+      // set not so bright!
+      encoder_pixels[enc].setBrightness(30);
+      encoder_pixels[enc].show();
+
+      found_encoders[enc] = true;
+    }
+
+This part of the code inicialices the rotary encoder as well as the neopixel inside the rotary encooder board. 
+
+To controll the Addressable LEDs on the OP-L, the Neopixel Library Is used as well as the Wheel functieon found in the Neopixel Sketch From Adafruit. 
+
+The Wheel funnction maps the RGB values used by the LEDs in a Wheel to achive a smooth transition between the hues they are able to reproduce. 
+        
+    uint32_t Wheel(byte WheelPos) {
+     WheelPos = 255 - WheelPos;
+         if (WheelPos < 85) {
+             return seesaw_NeoPixel::Color(255 - WheelPos * 3, 0, WheelPos * 3);
+          }
+         if (WheelPos < 170) {
+            WheelPos -= 85;
+             return seesaw_NeoPixel::Color(0, WheelPos * 3, 255 - WheelPos * 3);
+            }
+        WheelPos -= 170;
+        return seesaw_NeoPixel::Color(WheelPos * 3, 255 - WheelPos * 3, 0);
+     }
 
 
 
