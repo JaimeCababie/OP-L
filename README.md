@@ -1,5 +1,5 @@
 # OP-L
-## The OP-L is a portable programmable RGB with a handle. 
+## The OP-L is a portable programmable RGB lamp with a handle. 
 ![image](https://user-images.githubusercontent.com/98760075/169195585-2c031e6e-ce47-465b-a5a6-c0676219cad4.png)
 
 It is designed for work illumination, outdoor illumination, and for video recordings. 
