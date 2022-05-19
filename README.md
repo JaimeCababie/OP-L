@@ -79,6 +79,28 @@ The Wheel funnction maps the RGB values used by the LEDs in a Wheel to achive a 
         WheelPos -= 170;
         return seesaw_NeoPixel::Color(WheelPos * 3, 255 - WheelPos * 3, 0);
      }
+To control the color of the Neopixels with the rotary encoder, it is necesary to map the position of the rotary encoder, with the position on the Wheel of colors. 
+
+    for(int i=0; i<NUMPIXELS;i++){
+     pixels.setPixelColor(i,Wheel((new_position0*4)&0xFF));
+     pixels.setBrightness(brightness);
+    }
+    pixels.show();
+  }
+Check out the OP-L code to learn more about how it works!
+
+##Electronics
+The comoponents used in the OP-L are: 
+
+- 1 QTPY MO 
+- 1 Tp4056 USB C Charging Module
+- 1 XI6009e1 Voltage Booster Module
+- 2 Adafruit I2C QT Rotary Encoder
+- 1 4000mAh Lithium Ion Battery
+- 80 WS2812b LEDs 
+
+##Mecanical components
+
 
 
 
